@@ -31,6 +31,7 @@
 enum MsgTypes{
     JOINREQ,
     JOINREP,
+    HEARTBEAT,
     DUMMYLASTMSGTYPE
 };
 
@@ -58,7 +59,7 @@ private:
 
 public:
 	MP1Node(Member *, Params *, EmulNet *, Log *, Address *);
-	Member * getMemberNode() {
+	Member *getMemberNode() {
 		return memberNode;
 	}
 	int recvLoop();
@@ -73,8 +74,14 @@ public:
 	void nodeLoopOps();
 	int isNullAddress(Address *addr);
 	Address getJoinAddress();
-	void initMemberListTable(Member *memberNode);
+	void initMemberListTable(Member *memberNode, int id, short port);
 	void printAddress(Address *addr);
+	bool isIntroducer(Member *node);
+	void processJoinRequest(Address *addr, char *data, int size );
+	void processJoinReply(Address *addr, char *data, int size );
+	void processGossip(Address *addr, char *data, int size );
+	bool updateMemberList(Address *addr, long heartbeat);
+	void sendGossip(Address *addr, long heartbeat);
 	virtual ~MP1Node();
 };
 
