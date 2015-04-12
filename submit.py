@@ -151,7 +151,7 @@ URL = 'cloudcomputing2-001'
 URL_BASE = "https://class.coursera.org/"
 
 # the "Identifier" you used when creating the part
-partIds = ['mp2_create', 'mp2_read', 'mp2_update', 'mp2_delete']
+partIds = ['mp2_create', 'mp2_delete', 'mp2_read', 'mp2_update']
 # used to generate readable run-time information for students
 partFriendlyNames = ['Create Test', 'Delete Test', 'Read Test', 'Update Test'] 
 # source files to collect (just for our records)

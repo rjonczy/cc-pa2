@@ -29,3 +29,4 @@ cp dbg.log ../
 cd ..
 rm -rf mp2_assignment
 rm mp2_assignment.zip
+rm -rf __MACOSX
