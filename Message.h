@@ -39,6 +39,7 @@ public:
 	// construct read reply message
 	Message(int _transID, Address _fromAddr, string _value);
 	Message& operator = (const Message& anotherMessage);
+	
 	// serialize to a string
 	string toString();
 };

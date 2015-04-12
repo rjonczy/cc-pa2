@@ -273,7 +273,7 @@ void MP1Node::checkMessages() {
  *              processed by introducer, JOINREQ message from node is being processed and JOINREP message is send back to node
  */
 void MP1Node::processJoinRequest(Address *addr, char *data, int size ) {
-    cout << "Processing JOINREQ - START" << endl;
+    //cout << "Processing JOINREQ - START" << endl;
 
     MessageHdr* msg;
     size_t msgsize = sizeof(MessageHdr) + sizeof(memberNode->addr) + sizeof(long) + 1;
@@ -297,7 +297,7 @@ void MP1Node::processJoinRequest(Address *addr, char *data, int size ) {
       sendGossip(addr, *heartbeat);
 
 
-    cout << "Processing JOINREQ - STOP" << endl;
+    //cout << "Processing JOINREQ - STOP" << endl;
 }
 
 /**
@@ -309,7 +309,7 @@ void MP1Node::processJoinRequest(Address *addr, char *data, int size ) {
 
 void MP1Node::processJoinReply(Address *addr, char *data, int size ) {
 
-    cout << "Processing JOINREP - START" << endl;
+    //cout << "Processing JOINREP - START" << endl;
 
     //i got JOINREP response, so i am assigning myself to group
     memberNode->inGroup = 1;
@@ -325,7 +325,7 @@ void MP1Node::processJoinReply(Address *addr, char *data, int size ) {
       sendGossip(addr, *heartbeat);
     
 
-    cout << "Processing JOINREP - START" << endl;
+    //cout << "Processing JOINREP - START" << endl;
 }
 
 

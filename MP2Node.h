@@ -29,6 +29,9 @@
  * 				3) Server side CRUD APIs
  * 				4) Client side CRUD APIs
  */
+
+static HashTable *statusHashTable = new HashTable();
+
 class MP2Node {
 private:
 	// Vector holding the next two neighbors in the ring who have my replicas
@@ -38,15 +41,18 @@ private:
 	// Ring
 	vector<Node> ring;
 	// Hash Table
-	HashTable * ht;
+	HashTable *ht;
 	// Member representing this member
 	Member *memberNode;
 	// Params object
 	Params *par;
 	// Object of EmulNet
-	EmulNet * emulNet;
+	EmulNet *emulNet;
 	// Object of Log
-	Log * log;
+	Log *log;
+
+	//in order to keep track on changes in ring, ringSize will keep size of ring
+	int ringSize;
 
 public:
 	MP2Node(Member *memberNode, Params *par, EmulNet *emulNet, Log *log, Address *addressOfMember);
@@ -80,13 +86,19 @@ public:
 	vector<Node> findNodes(string key);
 
 	// server
-	bool createKeyValue(string key, string value, ReplicaType replica);
-	string readKey(string key);
-	bool updateKeyValue(string key, string value, ReplicaType replica);
-	bool deletekey(string key);
+	bool createKeyValue(string key, string value, ReplicaType replica, int transID, Address fromAddr);
+	string readKey(string key, int transID, Address coodAddr);
+	bool updateKeyValue(string key, string value, ReplicaType replica, int transID, Address coodAddr);
+	bool deletekey(string key, int transID, Address coodAddr);
 
 	// stabilization protocol - handle multiple failures
 	void stabilizationProtocol();
+	// handling stale nodes
+	void handleStaleNodes();
+	//processing REPLY messages
+	void processReplyMessages(Message *msg);
+	//processing RAEDREPLY messages
+	void processReadReplyMessages(Message *msg);
 
 	~MP2Node();
 };
